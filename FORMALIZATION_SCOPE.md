@@ -13,6 +13,13 @@ Theorem 4.3 is the sole external *algorithmic* input.  Constructing and solving
 the interpolation system, representing the interpolant, and filtering the
 root-solver output are internal, checked parts of the development.
 
+Two strengthened capstones are also proved.  They remove the manuscript's
+choice `d = ceil(ε^(-3/θ))` and instead choose the derivative order freely.
+For every fixed positive agreement and slack, the final rank comparison holds
+for all sufficiently large `d`.  This extends the checked combinatorial and
+algorithmic conclusions from the paper's sufficiently-low-rate regime to
+every fixed rate strictly below the agreement fraction.
+
 The manuscript snapshot used to choose the target is `Final.tex` with SHA-256
 
 ```text
@@ -75,6 +82,55 @@ The Lean encoding is `RSListDecoding.CombinatorialMainStatement` in
 vectors `Fin k → ZMod q` for degree-`< k` polynomials. Agreement at least
 `A = ceil(εn)` is exactly the integer form of relative Hamming distance at
 most `1-ε`.
+
+## Strengthened all-rate capstone
+
+Fix arbitrary `0 < ε < 1` and `0 < θ < 1`, and retain
+
+\[
+A=\lceil\varepsilon n\rceil,\qquad
+K=\lfloor(1-\theta)\varepsilon n\rfloor.
+\]
+
+The strengthened theorem provides `d₀ = d₀(ε,θ)` such that every natural
+`d ≥ d₀` works, provided `d < K`.  Set
+
+\[
+m=d^3,\qquad
+B=\left\lceil\frac{mA}{K-1}\right\rceil.
+\]
+
+Then, under the direct field hypotheses
+
+\[
+n\le q,\qquad B<q,\qquad mA\le q^2,
+\]
+
+the same conclusions hold for every `1 ≤ k ≤ K`: the decoding list has size
+at most `q^(4d+6)`, and the checked decoder returns it exactly in at most
+`q^(C(d^4+1))` finite-field operations.  The corresponding Lean propositions
+are `AllRateCombinatorialMainStatement` and
+`AllRateAlgorithmicMainStatement`; the trusted-surface theorems are
+`all_rate_combinatorial_main` and `all_rate_algorithmic_main`.
+
+The new argument changes only the final parameter assembly.  The repaired
+shell estimate already holds eventually in an independent `d`, and
+
+\[
+\frac{\theta^3}{262144}\frac{K-1}{n}
+d^{2\theta/(5+\theta)}>1
+\]
+
+also holds eventually because `(K-1)/n` is bounded below by
+`(1-θ)ε/2` and the exponent `2θ/(5+θ)` is positive.  All interpolation,
+contact, multiplicity-root, root-counting, and filtering lemmas are reused.
+
+Equivalently, for a target rate `R` and agreement `ε > R`, choose any
+`θ` with `R ≤ (1-θ)ε`.  The theorem then decodes a rate-`R` code from an
+error fraction approaching `1-R`, for fixed positive capacity gap.  The
+existential shell threshold and the deliberately coarse factor `262144` make
+the resulting constants potentially enormous; this is a qualitative
+all-rate extension, not a practical parameter recommendation.
 
 ## Why the ambient dimension is `K`
 
@@ -173,6 +229,9 @@ The exact Lean proposition is
 - Computational certificates; none are presently needed for this target.
 - A fully explicit closed formula for `ε₀(θ)` until all hidden threshold
   conditions in the draft have been made explicit.
+- Practical bounds for the new threshold `d₀(ε,θ)`; the shell component is
+  presently existential and the checked rank comparison intentionally keeps
+  coarse discrete losses.
 
 ## Manuscript normalization implemented by this scope
 

@@ -81,3 +81,50 @@ info: 'RSListDecoding.algorithmic_main' depends on axioms: [propext,
 -/
 #guard_msgs in
 #print axioms RSListDecoding.algorithmic_main
+
+/-! ## Free-derivative-order strengthening -/
+
+/- The new analytic threshold and interpolation construction introduce no
+additional project-specific assumptions. -/
+/--
+info: 'RSListDecoding.exists_freeOrderThreshold' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
+#print axioms RSListDecoding.exists_freeOrderThreshold
+
+/--
+info: 'RSListDecoding.exists_freeOrder_ambient_explainer' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
+#print axioms RSListDecoding.exists_freeOrder_ambient_explainer
+
+/--
+info: 'RSListDecoding.AllRateCombinatorialMainStatement' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
+#print axioms RSListDecoding.AllRateCombinatorialMainStatement
+
+/--
+info: 'RSListDecoding.all_rate_combinatorial_main' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RSListDecoding.kopparty_theorem_4_3_cardinality]
+-/
+#guard_msgs in
+#print axioms RSListDecoding.all_rate_combinatorial_main
+
+/--
+info: 'RSListDecoding.AllRateAlgorithmicMainStatement' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
+#print axioms RSListDecoding.AllRateAlgorithmicMainStatement
+
+/--
+info: 'RSListDecoding.all_rate_algorithmic_main' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RSListDecoding.kopparty_theorem_4_3_algorithm,
+ RSListDecoding.kopparty_theorem_4_3_cardinality]
+-/
+#guard_msgs in
+#print axioms RSListDecoding.all_rate_algorithmic_main

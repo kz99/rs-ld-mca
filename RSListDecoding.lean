@@ -44,6 +44,9 @@ import RSListDecoding.Lemmas.AlgorithmicRootCount
 import RSListDecoding.Lemmas.AlgorithmicDecoder
 import RSListDecoding.Lemmas.RuntimeBounds
 import RSListDecoding.Lemmas.MainAlgorithmic
+import RSListDecoding.Lemmas.FreeParameters
+import RSListDecoding.Lemmas.FreeRankThreshold
+import RSListDecoding.Lemmas.MainAllRate
 import RSListDecoding.Assumptions
 import RSListDecoding.Statements
 import RSListDecoding.Main

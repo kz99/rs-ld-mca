@@ -75,4 +75,48 @@ def AlgorithmicMainStatement : Prop :=
                       (decode y).operations ≤
                         q ^ (c * (derivativeOrder ε θ ^ 4 + 1))
 
+/-! ## Strengthening with a freely chosen derivative order -/
+
+/-- Capacity-form combinatorial statement.  For every fixed positive
+agreement `ε` and multiplicative rate slack `θ`, every sufficiently large
+derivative order works.  The code dimension may be any
+`k ≤ floor ((1-θ) ε n)`, so this covers every fixed rate strictly below the
+agreement fraction. -/
+def AllRateCombinatorialMainStatement : Prop :=
+  ∀ ε θ : ℝ, 0 < ε → ε < 1 → 0 < θ → θ < 1 →
+    ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d →
+      ∀ n : ℕ, 1 ≤ n → d < ambientDimension ε θ n →
+        ∀ k q : ℕ,
+          1 ≤ k → k ≤ ambientDimension ε θ n →
+          ∀ hq : Nat.Prime q,
+            n ≤ q →
+            interpolationDegreeBudgetAt d ε θ n < q →
+            multiplicityAt d * agreementThreshold ε n ≤ q ^ 2 →
+            ∀ α : Fin n → ZMod q, Function.Injective α →
+              IsListDecodableAtAgreement (k := k) hq.ne_zero α
+                (agreementThreshold ε n) (publicListBoundAt q d)
+
+/-- Algorithmic capacity-form statement in the same finite-field-operation
+model as `AlgorithmicMainStatement`. -/
+def AllRateAlgorithmicMainStatement : Prop :=
+  ∃ c : ℕ, 0 < c ∧
+    ∀ ε θ : ℝ, 0 < ε → ε < 1 → 0 < θ → θ < 1 →
+      ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d →
+        ∀ n : ℕ, 1 ≤ n → d < ambientDimension ε θ n →
+          ∀ k q : ℕ,
+            1 ≤ k → k ≤ ambientDimension ε θ n →
+            ∀ hq : Nat.Prime q,
+              n ≤ q →
+              interpolationDegreeBudgetAt d ε θ n < q →
+              multiplicityAt d * agreementThreshold ε n ≤ q ^ 2 →
+              ∀ α : Fin n → ZMod q, Function.Injective α →
+                ∃ decode :
+                    (Fin n → ZMod q) → FieldCost (Finset (Message q k)),
+                  ∀ y : Fin n → ZMod q,
+                    (decode y).result =
+                        decodingList (k := k) hq.ne_zero α y
+                          (agreementThreshold ε n) ∧
+                    (decode y).result.card ≤ publicListBoundAt q d ∧
+                    (decode y).operations ≤ q ^ (c * (d ^ 4 + 1))
+
 end RSListDecoding

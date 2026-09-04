@@ -1,4 +1,4 @@
-import RSListDecoding.Lemmas.MainAlgorithmic
+import RSListDecoding.Lemmas.MainAllRate
 
 /-!
 # Trusted statement surface
@@ -30,5 +30,14 @@ theorem combinatorial_main : CombinatorialMainStatement :=
 /-- The scoped decoder construction and finite-field-operation bound. -/
 theorem algorithmic_main : AlgorithmicMainStatement :=
   algorithmicMainStatement_proved
+
+/-- Capacity-form combinatorial theorem with a freely chosen derivative
+order. -/
+theorem all_rate_combinatorial_main : AllRateCombinatorialMainStatement :=
+  allRateCombinatorialMainStatement_proved
+
+/-- Capacity-form decoder and finite-field-operation bound. -/
+theorem all_rate_algorithmic_main : AllRateAlgorithmicMainStatement :=
+  allRateAlgorithmicMainStatement_proved
 
 end RSListDecoding

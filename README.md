@@ -11,6 +11,17 @@ trusted surface is `RSListDecoding/Main.lean`:
 - `RSListDecoding.combinatorial_main` proves the list-size theorem.
 - `RSListDecoding.algorithmic_main` proves exact decoder correctness and the
   finite-field-operation bound.
+- `RSListDecoding.all_rate_combinatorial_main` strengthens the paper's
+  low-rate theorem by choosing the Hasse-derivative order independently of
+  the agreement parameter.
+- `RSListDecoding.all_rate_algorithmic_main` gives the corresponding decoder
+  and operation bound.
+
+For every fixed `0 < ε < 1` and `0 < θ < 1`, the strengthened statements
+provide a threshold `d₀(ε, θ)` such that every `d ≥ d₀` works for all
+dimensions `k ≤ floor ((1-θ) ε n)`, subject to the same explicit root-finding
+field conditions.  Thus every fixed rate strictly below agreement is covered;
+the resulting constants are not claimed to be practical.
 
 The only project-specific assumptions are the cardinality and algorithmic
 clauses of Kopparty's Theorem 4.3, both declared and documented in
